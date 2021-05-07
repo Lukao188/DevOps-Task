@@ -1,0 +1,76 @@
+pipeline {
+
+    agent any // Jenkins will run the job on any of the available nodes
+
+    options {
+        timeout(time: 20, unit: 'MINUTES') // Execution JOB Timeout
+        buildDiscarder(logRotator(numToKeepStr: '5')) // How many entries to keep in the history
+    }
+    
+    tools {
+        maven "jenkins-maven" // Version of Maven defined in Jenkins Maven Config
+    }
+
+    environment {
+        SOURCE_REPOSITORY_URL = 'http://gogs:3000/git-user/first-repo.git' // Source Repository URL
+        GIT_CREDENTIALS = 'first-repo' // Gogs Credentials created using Jenkins Credentials
+        BRANCH = 'master' // Branch to use for the build
+        NEXUS_VERSION = 'nexus3'
+        NEXUS_PROTOCOL = 'http'
+        NEXUS_URL = 'nexus3:8081'
+        NEXUS_REPOSITORY = 'maven-nexus-repo'
+        NEXUS_CREDENTIALS = 'nexus-user-credentials' // Nexus Credentials created using Jenkins Credentials
+    }
+
+    stages {
+        stage ('Checkout source') {
+            steps {
+            echo "Checkout Source Code from: ${SOURCE_REPOSITORY_URL}"
+            git branch: "${BRANCH}",credentialsId: "${GIT_CREDENTIALS}",url: "${SOURCE_REPOSITORY_URL}"
+            }
+        }
+
+        stage("Maven Build") {
+            steps {
+                script {
+                    sh "mvn clean package"
+                }
+            }
+        }
+        stage("Publish to Nexus Repository Manager") {
+            steps {
+                script{
+                    pom = readMavenPom file: "pom.xml";
+                    filesByGlob = findFiles(glob: "target/*.${pom.packaging}");
+                    echo "${filesByGlob[0].name} ${filesByGlob[0].path} ${filesByGlob[0].directory} ${filesByGlob[0].length} ${filesByGlob[0].lastModified}"
+                    artifactPath = filesByGlob[0].path;
+                    artifactExists = fileExists artifactPath;
+                    if(artifactExists) {
+                        echo "* File: ${artifactPath}, group: ${pom.groupId}, packaging: ${pom.packaging}, version ${pom.version}";
+                        nexusArtifactUploader(
+                            nexusVersion: NEXUS_VERSION,
+                            protocol: NEXUS_PROTOCOL,
+                            nexusUrl: NEXUS_URL,
+                            groupId: pom.groupId,
+                            version: pom.version,
+                            repository: NEXUS_REPOSITORY,
+                            credentialsId: NEXUS_CREDENTIALS,
+                            artifacts: [
+                                [artifactId: pom.artifactId,
+                                classifier: '',
+                                file: artifactPath,
+                                type: pom.packaging],
+                                [artifactId: pom.artifactId,
+                                classifier: '',
+                                file: "pom.xml",
+                                type: "pom"]
+                            ]
+                        );
+                    } else {
+                        error "* File: ${artifactPath}, could not be found";
+                    }
+                }
+            }
+        }
+    }
+}

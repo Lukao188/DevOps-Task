@@ -1,0 +1,36 @@
+version: '3.7'
+services:
+  jenkins:
+    container_name: jenkins
+    image: "jenkins/jenkins:lts"
+    privileged: true
+    user: root
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    volumes:
+      - $PWD/jenkins_data:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - net
+  nexus:
+    container_name: nexus3
+    image: "sonatype/nexus3"
+    ports: 
+      - "8081:8081"
+    volumes:
+      - $PWD/nexus:/nexus-data
+    networks:
+      - net
+  gogs:
+    container_name: gogs
+    image: "gogs/gogs"
+    ports:
+      - "10022:22"
+      - "10080:3000"
+    volumes:
+      - $PWD/gogs/data:/data
+    networks:
+      - net
+networks:
+  net:
