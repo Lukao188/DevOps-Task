@@ -53,11 +53,11 @@
 - To test the SSH connectivity run `ssh -T git@localhost -p 10022`
 - Clone the needed repo `git clone https://github.com/stevancvetkovic/java-app-sample.git`.
 - Make a local repo and push it to our Gogs instance:
-    mkdir first-repo 
+ ```mkdir first-repo 
     cd first-repo/ 
     git init
     cp -r ../java-app-sample/* .
     git add .
     git commit -m "Added java app to the repo"
     git remote add origin ssh://git@localhost:10022/git-user/first-repo.git
-    git push -u origin master`
+    git push -u origin master```
