@@ -12,7 +12,8 @@
 - Note: It is possible to remove all stopped containers, dangling images, and unused networks using `docker system prune`
 ### Jenkins initial setup:
 - Pull the latest Jenkins LTS image from Docker Hub `docker pull jenkins/jenkins:lts`
-- Start the jenkins container (Also used to recreate containers) `docker-compose up -d jenkins`
+- Start the jenkins container (Also used to recreate containers) `docker-compose up -d jenkins` 
+  in detached -d mode so Docker container runs in the background of your terminal 
 - Get the initial admin password `docker exec jenkins cat var/jenkins_home/secrets/initialAdminPassword`
 - Confirm the jenkins container is running `docker ps`
 - Navigate to the URL in your browser: http://localhost:8080 using the initial password to access and setup Jenkins selecting install suggested plugins.
