@@ -35,7 +35,7 @@
 - Start the nexus container (Also used to recreate containers) `docker-compose up -d nexus`
 - Get the initial password for admin user `docker exec nexus3 cat nexus-data/admin.password`
 - Test out if Jenkins can properly talk to Nexus using by typing in our terminal `winpty docker exec -it jenkins bash` and then inside the container `curl -v nexus3:8081` -v means in verbose mode so we can get a detailed response.
-- Navigate to the Nexus repository URL http://localhost:8081 using your browser to access Nexus and log in with admin user and the initial password. Change the password and enable anonymous access.
+- Navigate to the Nexus artifact repository URL http://localhost:8081 using your browser to access Nexus and log in with admin user and the initial password. Change the password and enable anonymous access.
 - Go into settings and create a new local user called jenkins-user. Grant it nx-admin rights. Log in with this user.
 - In settings/repositories create a hosted repository where we will upload our artifacts. Create/maven2(hosted), name it maven-nexus-repo, version policy mixed and allow redeploy.
 
@@ -45,4 +45,9 @@
 - Remove the volume that is attached to the container `docker-compose rm -v nexus`
 
 ### Part III) Gogs initial setup:
--
+- Pull the Gogs image from Docker Hub `docker pull gogs/gogs`
+- In the docker-compose file Gogs container is configured so that it serves Git’s Web interface at localhost:10080, and ssh at localhost:10022 for external communication.
+- Start the Gogs container (Also used to recreate containers) `docker-compose up -d gogs`
+- Navigate to the Gogs repository URL http://localhost:10080 using your browser and complete the initial setup, select SQLite3 and leave other options as default. After the installation you need to manually navigate to http://localhost:10080/user/login since we mapped container's port 3000 to our external host port 10080. Sing up with a user: git-user after which you need ti create a new repository: first-repo
+- If you don't have one create an RSA key pair in your home directory `ssh-keygen -t rsa` go into the created directory `cd .ssh/` and copy the contents of id_rsa.pub key to the Gogs repository settings/ssh keys/add key, name it first-pub-key.
+- Test the SSH connectivity `ssh -T git@localhost -p 10022`
