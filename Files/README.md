@@ -61,7 +61,7 @@
 ### Part IV) Configuring the pipeline:
 - Create a freestyle job on jenkins to test the connectivity with Gogs and Nexus. In the build step choose execute shell and enter:
 ``` curl -v nexus3:8081
-curl -v gogs:3000
+    curl -v gogs:3000
 ```
 - Clone the needed repo `git clone https://github.com/stevancvetkovic/java-app-sample.git`.
 - Make a local repo in order to push the java app sample to our Gogs instance:
