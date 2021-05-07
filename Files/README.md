@@ -1,7 +1,7 @@
 # Implementation Steps
 
 ## Pre-Requisites:
-- Taking into consideration that this will be run on Windows OS.
+- This document is taking into consideration that this will be run on the Windows OS.
 - Install Docker Desktop following instructions from: https://docs.docker.com/docker-for-windows/install/
 - Install Git Bash from: https://git-scm.com/downloads
 - Clone this repository via `git clone https://github.com/Lukao188/DevOps-Task.git` or Download the files into a folder.
@@ -48,11 +48,23 @@
 - Pull the Gogs image from Docker Hub `docker pull gogs/gogs`
 - In the docker-compose file Gogs container is configured so that it serves Git’s Web interface at localhost:10080, and ssh at localhost:10022 for external communication.
 - Start the Gogs container (Also used to recreate containers) `docker-compose up -d gogs`
+- Test out if Gogs can properly talk to Jenkins by typing in our terminal `winpty docker exec -it gogs bash` and then inside the container `curl -v jenkins:8080` -v means in verbose mode so we can get a detailed response.
 - Navigate to the Gogs repository URL http://localhost:10080 using your browser and complete the initial setup, select SQLite3 and leave other options as default. After the installation you need to manually navigate to http://localhost:10080/user/login since we mapped container's port 3000 to our external host port 10080. Sing up with a user: git-user after which you need ti create a new repository: first-repo
 - If you don't have one create an RSA key pair in your home directory `ssh-keygen -t rsa` go into the created directory `cd .ssh/` and copy the contents of id_rsa.pub key to the Gogs repository settings/ssh keys/add key, name it first-pub-key.
 - To test the SSH connectivity run `ssh -T git@localhost -p 10022`
+
+- In order to see the logs of the container `docker-compose logs -f -t gogs`
+- Stop the container `docker compose stop gogs`
+- Remove the container `docker compose rm -f gogs`
+- Remove the volume that is attached to the container `docker-compose rm -v gogs`
+
+### Part IV) Configuring the pipeline:
+- Create a freestyle job on jenkins to test the connectivity with Gogs and Nexus. In the build step choose execute shell and enter:
+```curl -v nexus3:8081
+curl -v gogs:3000
+```
 - Clone the needed repo `git clone https://github.com/stevancvetkovic/java-app-sample.git`.
-- Make a local repo and push it to our Gogs instance:
+- Make a local repo in order to push the java app sample to our Gogs instance:
 ```mkdir first-repo 
 cd first-repo/ 
 git init
@@ -62,6 +74,3 @@ git commit -m "Added java app to the repo"
 git remote add origin ssh://git@localhost:10022/git-user/first-repo.git
 git push -u origin master
 ```
-
-
-
