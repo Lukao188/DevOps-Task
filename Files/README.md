@@ -5,7 +5,7 @@
 - Install Docker Desktop following instructions from: https://docs.docker.com/docker-for-windows/install/
 - Install Git Bash from: https://git-scm.com/downloads
 - Clone this repository via `git clone https://github.com/Lukao188/DevOps-Task.git` or Download the files into a folder.
-- Go into the folder where the files are located i.e. `cd Files` and `rm -rf .git/` if you cloned the repo.
+- Go into the folder where the files are located i.e. `cd Files`.
 
 ## Installation:
 - Note: It is possible to start the entire project using only `docker compose up -d` but in the next part we will cover building each container one by one.
