@@ -33,7 +33,7 @@ pipeline {
         
         stage('Deploy the artifact to nexus'){
             steps{
-                configFileProvider([configFile(fileId: '65d6a80c-d68a-405d-af28-6c2e73760863', variable: 'MAVEN_GLOBAL_SETTINGS')]) {
+                configFileProvider([configFile(fileId: 'jenkins-nexus-config', variable: 'MAVEN_GLOBAL_SETTINGS')]) {
                     sh "mvn -gs $MAVEN_GLOBAL_SETTINGS deploy"  // This step copies the packaged code to the remote Nexus repository
                 }
             }
