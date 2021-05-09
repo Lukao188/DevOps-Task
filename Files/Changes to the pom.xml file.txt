@@ -1,0 +1,6 @@
+  <distributionManagement>
+   <snapshotRepository>
+     <id>nexus-snapshots</id>
+     <url>http://nexus3:8081/repository/maven-nexus-repo/</url>
+   </snapshotRepository>
+  </distributionManagement>
