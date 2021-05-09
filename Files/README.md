@@ -1,7 +1,6 @@
 # Implementation Steps
 
 ## Pre-Requisites:
-- This document is taking into consideration that this will be run on the Windows OS.
 - Install Docker Desktop following instructions from: https://docs.docker.com/docker-for-windows/install/
 - Install Git Bash from: https://git-scm.com/downloads
 
