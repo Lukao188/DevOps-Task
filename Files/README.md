@@ -3,8 +3,7 @@
 ## Pre-Requisites:
 - Install Docker Desktop following instructions from: https://docs.docker.com/docker-for-windows/install/
 - Install Git Bash from: https://git-scm.com/downloads
-
-## Installation:
+## Task Steps
 - Note: It is possible to start the entire project using only `docker compose up -d` but in the next part we will cover building each container one by one.
 - Note: It is possible to remove all stopped containers, dangling images, and unused networks using `docker system prune`
 ### Part I) Jenkins initial setup:
