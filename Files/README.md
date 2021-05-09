@@ -23,6 +23,7 @@
 3. Gogs
 4. Pipeline Maven Integration
 5. Maven Integration
+6. Config File Provider
 - After the download is finished tick restart jenkins and wait for it to reboot
 - Set up maven as a managed tool Configuration/Global Tool Configuration/Maven installations name it jenkins-maven and select the latest version.
 
