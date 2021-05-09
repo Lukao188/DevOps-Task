@@ -23,7 +23,6 @@
 6. Config File Provider
 - After the download is finished tick restart jenkins and wait for it to reboot
 - Set up maven as a managed tool Configuration/Global Tool Configuration/Maven installations name it jenkins-maven and select the latest version.
-- Under Config/Managed Files Add a new config Global Maven Settings.xml and give it name and ID values: jenkins-nexus-config
 
 - In order to see the logs of the container `docker-compose logs -f -t jenkins`
 - Stop the container `docker compose stop jenkins`
@@ -38,6 +37,8 @@
 - Navigate to the Nexus artifact repository URL http://localhost:8081 using your browser to access Nexus and log in with admin user and the initial password. Change the password and enable anonymous access.
 - Go into settings and create a new local user called jenkins-user. Grant it nx-admin rights. Log in with this user.
 - In settings/repositories create a hosted repository where we will upload our artifacts. Create/maven2(hosted), name it maven-nexus-repo, version policy mixed and allow redeploy.
+- In Jenkins under Config/Managed Files/Add a new config/Global Maven Settings.xml, give it name and ID values: jenkins-nexus-config and copy the .xml contents into it.
+- Make sure to enter your Nexus Credentials in the username/passwrod fields.
 
 - In order to see the logs of the container `docker-compose logs -f -t nexus`
 - Stop the container `docker compose stop nexus`
