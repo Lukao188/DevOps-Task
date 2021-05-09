@@ -9,8 +9,8 @@ xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
 <servers>
   <server>
     <id>nexus-snapshots</id>
-    <username>jenkins-user</username>
-    <password>shroot12</password>
+    <username>YOUR_NEXUS_USERNAME</username>
+    <password>YOUR_NEXUS_PASSWORD</password>
   </server>
 </servers>
 <mirrors/>
