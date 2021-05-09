@@ -1,0 +1,42 @@
+pipeline {
+
+    agent any // Jenkins will run the job on any of the available nodes
+
+    options {
+        timeout(time: 20, unit: 'MINUTES') // Execution JOB Timeout
+        buildDiscarder(logRotator(numToKeepStr: '5')) // How many entries to keep in the history
+    }
+    
+    tools {
+        maven "jenkins-maven" // Version of Maven defined in Jenkins Maven Config
+    }
+
+    environment {
+        SOURCE_REPOSITORY_URL = 'http://gogs:3000/git-user/first-repo.git' // Source Repository URL
+        GIT_CREDENTIALS = 'first-repo' // Gogs Credentials created using Jenkins Credentials
+        BRANCH = 'master' // Branch to use for the build
+    }
+
+    stages {
+        stage ('Checkout source') {
+            steps {
+            echo "Checkout Source Code from: ${SOURCE_REPOSITORY_URL}"
+            git branch: "${BRANCH}",credentialsId: "${GIT_CREDENTIALS}",url: "${SOURCE_REPOSITORY_URL}"
+            }
+        }
+        
+        stage('Build the artifact'){
+            steps{
+                sh "mvn clean package"  // This step packages the compiled code in distributable JAR format
+            }
+        }
+        
+        stage('Deploy the artifact to nexus'){
+            steps{
+                configFileProvider([configFile(fileId: '65d6a80c-d68a-405d-af28-6c2e73760863', variable: 'MAVEN_GLOBAL_SETTINGS')]) {
+                    sh "mvn -gs $MAVEN_GLOBAL_SETTINGS deploy"  // This step copies the packaged code to the remote Nexus repository
+                }
+            }
+        }
+    }
+}
