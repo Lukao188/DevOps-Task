@@ -23,6 +23,7 @@
 6. Config File Provider
 - After the download is finished tick restart jenkins and wait for it to reboot
 - Set up maven as a managed tool Configuration/Global Tool Configuration/Maven installations name it jenkins-maven and select the latest version.
+- Under Config/Managed Files Add a new config Global Maven Settings.xml and give it name and ID values: jenkins-nexus-config
 
 - In order to see the logs of the container `docker-compose logs -f -t jenkins`
 - Stop the container `docker compose stop jenkins`
