@@ -26,7 +26,7 @@ pipeline {
         stage ('Checkout source') {
             steps {
             echo "Checkout Source Code from: ${SOURCE_REPOSITORY_URL}"
-            git branch: "${BRANCH}",credentialsId: "${GIT_CREDENTIALS}",url: "${SOURCE_REPOSITORY_URL}"
+            git branch: "${BRANCH}",credentialsId: "${GIT_CREDENTIALS}",url: "${SOURCE_REPOSITORY_URL}" 
             }
         }
 
