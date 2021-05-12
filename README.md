@@ -1,5 +1,4 @@
 # DevOps Task
-
 ## Software in use:
 -	Docker Desktop
 -	Jenkins
