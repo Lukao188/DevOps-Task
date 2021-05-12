@@ -79,8 +79,8 @@ git remote add origin ssh://git@localhost:10022/git-user/first-repo.git
 git push -u origin master
 ```
 - On jenkins under settings/manage credentials/jenkins/global credentials/ add your nexus and gogs credentials.
-- ID: first-repo username/password:git-user/***
-- ID: nexus-user-credentials username/password:jenkins-user/***
+- ID: first-repo username/password: git-user/***
+- ID: nexus-user-credentials username/password: jenkins-user/***
 - Create a Jenkins Pipeline job (Groovy) that clones local Gogs repo with this app, name it Devops_Task, copy the Jenkinsfile contents into the pipeline, save and run the build.
 - On Gogs add a new webhook in http://localhost:10080/git-user/first-repo/settings/hooks/ Gogs type, with Payload URL: http://jenkins:8080/gogs-webhook/?job=Devops_Task a Secret you want and select just the push event.
 - Back in the Devops_Task under Gogs Webhook, tick Use Gogs Secret and enter the secret you chose. After this you can test the hook by pushing any change to your Gogs repo which will trigger a build and send the artifacts to Nexus.
