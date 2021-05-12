@@ -23,7 +23,7 @@ pipeline {
     }
 
     stages {
-        stage ('Checkout source') {
+        stage ('Clone code from Gogs repo') {
             steps {
             echo "Checkout Source Code from: ${SOURCE_REPOSITORY_URL}"
             git branch: "${BRANCH}",credentialsId: "${GIT_CREDENTIALS}",url: "${SOURCE_REPOSITORY_URL}" 
