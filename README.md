@@ -1,7 +1,5 @@
 # DevOps Task
 
-## Assessed to take a maximum of 10 working days for a Junior DevOps Engineer. In case any of the specific versions of the applications listed below causes you issues, feel free to use any other recent version that works for you.
-
 ## Software in use:
 -	Docker Desktop
 -	Jenkins
