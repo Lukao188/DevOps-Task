@@ -33,7 +33,7 @@ pipeline {
         stage("Maven Build") {
             steps {
                 script {
-                    sh "mvn clean package"
+                    sh "mvn clean package" // This step packages the compiled code in distributable JAR format
                 }
             }
         }
