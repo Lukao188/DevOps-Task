@@ -8,6 +8,7 @@
 - Note: It is possible to remove all stopped containers, dangling images, and unused networks using `docker system prune`
 ### Part I) Jenkins initial setup:
 - Go into the folder where the compose file is located i.e. `cd Files`.
+- Create the following directory `mkdir jenkins_data` This volume will be used to persist all your jenkins data: configurations, plugins, pipelines, passwords, etc.
 - Pull the latest Jenkins LTS image from Docker Hub `docker pull jenkins/jenkins:lts`
 - Start the jenkins container (Also used to recreate containers) `docker-compose up -d jenkins` 
   in detached -d mode so that the Docker container runs in the background of your terminal 
@@ -30,6 +31,8 @@
 - Remove the volume that is attached to the container `docker-compose rm -v jenkins`
 
 ### Part II) Nexus initial setup:
+- Go into the folder where the compose file is located i.e. `cd Files`.
+- Create the following directory `mkdir nexus` This volume will be used to persist all your nexus data: configurations, plugins, pipelines, passwords, etc.
 - Pull the Sonatype Nexus 3 image from Docker Hub `docker pull sonatype/nexus3`
 - Start the nexus container (Also used to recreate containers) `docker-compose up -d nexus`
 - Get the initial password for admin user `docker exec nexus3 cat nexus-data/admin.password`
@@ -46,6 +49,8 @@
 - Remove the volume that is attached to the container `docker-compose rm -v nexus`
 
 ### Part III) Gogs initial setup:
+- Go into the folder where the compose file is located i.e. `cd Files`.
+- Create the following directory `mkdir -p gogs/data` This volume will be used to persist all your gogs data: configurations, plugins, pipelines, passwords, etc.
 - Pull the Gogs image from Docker Hub `docker pull gogs/gogs`
 - In the docker-compose file Gogs container is configured so that it serves Git’s Web interface at localhost:10080, and ssh at localhost:10022 for external communication.
 - Start the Gogs container (Also used to recreate containers) `docker-compose up -d gogs`
