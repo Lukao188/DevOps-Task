@@ -84,4 +84,4 @@ git push -u origin master
 - Create a Jenkins Pipeline job (Groovy), name it Devops_Task, copy the Jenkinsfile contents into the pipeline, save and run the build.
 - On Gogs add a new webhook in http://localhost:10080/git-user/first-repo/settings/hooks/ of type Gogs, with Payload URL: http://jenkins:8080/gogs-webhook/?job=Devops_Task a Secret you want and select just the push event.
 - Back in the Devops_Task under Gogs Webhook, tick Use Gogs Secret and enter the secret you chose. After this you can test the hook by pushing any change to your Gogs repo which will trigger a build and send the artifacts to Nexus.
-- Under Nexus Browse/ maven-nexus-repo we can see our build artifacts.
+- Under Nexus Browse/maven-nexus-repo we can see our build artifacts. Expand the specific build, select the file that you want to inspect and on the right-hand side click on the path which will download the file.
