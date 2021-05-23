@@ -15,13 +15,15 @@
 - Get the initial admin password `docker exec jenkins cat var/jenkins_home/secrets/initialAdminPassword`
 - Confirm the jenkins container is running `docker ps`
 - Navigate to the Jenkins URL in your browser: http://localhost:8080 using the initial password to access and setup Jenkins selecting install suggested plugins. After that create your admin user. 
-- Go to manage Jenkins/manage Plugins/available, select the following plugins and select install without restart:
+- Since we are using a custom Docker image for Jenkins container, specified in the Dockerfile, there is no need for manual installation of the needed plugins.
+- However, in order to confirm we have all the required plugins for our job, go to manage Jenkins/manage Plugins/installed and check whether the following plugins been installed:
 1. Nexus Artifact Uploader
 2. Pipeline Utility Steps
 3. Gogs
 4. Pipeline Maven Integration
 5. Maven Integration
 6. Config File Provider
+- If any are missing install them manually or update them to the latest version available.
 - After the download is finished tick restart jenkins and wait for it to reboot
 - Set up maven as a managed tool Configuration/Global Tool Configuration/Maven installations name it jenkins-maven and select the latest version.
 #### Additional info:
