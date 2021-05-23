@@ -11,6 +11,12 @@ services:
     volumes:
       - $PWD/jenkins_data:/var/jenkins_home
       - /var/run/docker.sock:/var/run/docker.sock
+    healthcheck:
+      test: curl --fail -s http://localhost:8080 || exit 1
+      interval: 10s
+      timeout: 10s
+      start_period: 10s
+      retries: 3
     networks:
       - net
   nexus:
@@ -20,6 +26,12 @@ services:
       - "8081:8081"
     volumes:
       - $PWD/nexus:/nexus-data
+    healthcheck:
+      test: curl --fail -s http://localhost:8081 || exit 1
+      interval: 10s
+      timeout: 10s
+      start_period: 10s
+      retries: 3
     networks:
       - net
   gogs:
@@ -30,6 +42,12 @@ services:
       - "10080:3000"
     volumes:
       - $PWD/gogs/data:/data
+    healthcheck:
+      test: curl --fail -s http://localhost:10080 || exit 1
+      interval: 10s
+      timeout: 10s
+      start_period: 10s
+      retries: 3
     networks:
       - net
 networks:
