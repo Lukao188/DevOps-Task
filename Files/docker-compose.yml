@@ -3,6 +3,7 @@ services:
   jenkins:
     container_name: jenkins
     image: "jenkins/jenkins:lts"
+    restart: always
     privileged: true
     user: root
     ports:
@@ -22,6 +23,7 @@ services:
   nexus:
     container_name: nexus3
     image: "sonatype/nexus3"
+    restart: always
     ports: 
       - "8081:8081"
     volumes:
@@ -37,6 +39,7 @@ services:
   gogs:
     container_name: gogs
     image: "gogs/gogs"
+    restart: always
     ports:
       - "10022:22"
       - "10080:3000"
