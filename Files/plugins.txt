@@ -1,0 +1,6 @@
+nexus-artifact-uploader:2.13
+pipeline-utility-steps:2.7.1
+gogs-webhook:1.0.15
+pipeline-maven:3.10.0
+maven-plugin:3.10
+config-file-provider:3.8.0
