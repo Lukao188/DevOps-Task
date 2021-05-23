@@ -4,6 +4,7 @@ services:
     build:
       context: .
     container_name: jenkins
+    image: "jenkins"
     restart: always
     privileged: true
     user: root
