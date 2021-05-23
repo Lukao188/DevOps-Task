@@ -1,8 +1,9 @@
 version: '3.7'
 services:
   jenkins:
+    build:
+      context: .
     container_name: jenkins
-    image: "jenkins/jenkins:lts"
     restart: always
     privileged: true
     user: root
@@ -14,10 +15,10 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8080"]
-      interval: 30s
-      timeout: 3s
-      start_period: 10s
-      retries: 10
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
     networks:
       - net
   nexus:
@@ -30,10 +31,10 @@ services:
       - $PWD/nexus:/nexus-data
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8081"]
-      interval: 30s
-      timeout: 3s
-      start_period: 10s
-      retries: 10
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
     networks:
       - net
   gogs:
@@ -47,10 +48,10 @@ services:
       - $PWD/gogs/data:/data
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:3000"]
-      interval: 30s
-      timeout: 3s
-      start_period: 10s
-      retries: 10
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
     networks:
       - net
 networks:
