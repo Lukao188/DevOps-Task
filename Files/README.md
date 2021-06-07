@@ -5,7 +5,7 @@
 - Install Git Bash from: https://git-scm.com/downloads
 - Optional: Set VSCode as the default text editor, copy the contents from MyGitConfigSettings into the config file
 ```git config --global core.editor code
-git config --global -e
+cd first-repo/ 
 ```
 ## Task Steps
 - Note: It is possible to start the entire project in the folder where the compose file is located using only `docker compose up -d` but instead we will focus on building each container one by one.
