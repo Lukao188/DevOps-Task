@@ -1,6 +1,6 @@
 [user]
-	email = ***
-	name = ***
+	email = lukao188@gmail.com
+	name = Luka Oberknezev
 [core]
 	editor = code -w
 [diff]
@@ -16,3 +16,9 @@
 [mergetool]
 	prompt = false
 	keepbackup = false
+[alias]
+	onelinegraph = log --oneline --graph --decorate
+	expireunreachablenow = reflog expire --expire-unreachable=now --all
+	gcunreachablenow = gc --prune=now
+[fetch]
+	prune = true
