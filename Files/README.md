@@ -31,15 +31,7 @@ git config --global -e
 - If any are missing install them manually or update them to the latest version available.
 - After the download is finished tick restart jenkins and wait for it to reboot
 - Set up maven as a managed tool Configuration/Global Tool Configuration/Maven installations name it jenkins-maven and select the latest version.
-#### Additional info:
-- In order to see the logs of the container `docker-compose logs -f -t jenkins`
-- list all docker images `docker images -a`
-- List all docker containers `docker ps -a`
-- Stop the container `docker stop <container_id>`
-- Remove the container `docker rm <container_id>`
-- Remove the image `docker rmi <image_id>`
-- Remove the volume that is attached to the container `docker-compose rm -v <container_name>`
-
+- 
 ### Part II) Nexus initial setup:
 - Go into the folder where the compose file is located i.e. `cd Files`.
 - Create the following directory `mkdir nexus` This volume will be used to persist all your nexus data: configurations, plugins, pipelines, passwords, etc.
@@ -63,6 +55,15 @@ git config --global -e
 - Navigate to the Gogs repository URL http://localhost:10080 using your browser and complete the initial setup, select SQLite3 and leave other options as default. After the installation you need to manually navigate to http://localhost:10080/user/login since we mapped container's port 3000 to our external host port 10080. Sing up with a user: git-user after which you need ti create a new repository: first-repo
 - If you don't have one create an RSA key pair in your home directory `ssh-keygen -t rsa` go into the created directory `cd .ssh/` and copy the contents of id_rsa.pub key to the Gogs repository settings/ssh keys/add key, name it first-pub-key.
 - To test the SSH connectivity run `ssh -T git@localhost -p 10022`
+
+### Additional info:
+- In order to see the logs of the container `docker-compose logs -f -t jenkins`
+- list all docker images `docker images -a`
+- List all docker containers `docker ps -a`
+- Stop the container `docker stop <container_id>`
+- Remove the container `docker rm <container_id>`
+- Remove the image `docker rmi <image_id>`
+- Remove the volume that is attached to the container `docker-compose rm -v <container_name>`
 
 ### Part IV) Configuring the jenkins pipeline job:
 - Create a new freestyle project on jenkins to test the connectivity with Gogs and Nexus. In the build step choose execute shell, enter the following
