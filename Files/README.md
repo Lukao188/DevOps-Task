@@ -57,7 +57,7 @@ git config --global -e
 - To test the SSH connectivity run `ssh -T git@localhost -p 10022`
 
 ### Additional info:
-- In order to see the logs of the container `docker-compose logs -f -t jenkins`
+- In order to see the logs of the container `docker-compose logs -f -t <container_name>`
 - list all docker images `docker images -a`
 - List all docker containers `docker ps -a`
 - Stop the container `docker stop <container_id>`
