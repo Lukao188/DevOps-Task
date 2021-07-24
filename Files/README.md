@@ -31,7 +31,7 @@ git config --global -e
 - If any are missing install them manually or update them to the latest version available.
 - After the download is finished tick restart jenkins and wait for it to reboot
 - Set up maven as a managed tool Configuration/Global Tool Configuration/Maven installations name it jenkins-maven and select the latest version.
-- 
+
 ### Part II) Nexus initial setup:
 - Go into the folder where the compose file is located i.e. `cd Files`.
 - Create the following directory `mkdir nexus` This volume will be used to persist all your nexus data: configurations, plugins, pipelines, passwords, etc.
